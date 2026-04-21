@@ -1,16 +1,15 @@
 /**
  * TrainConsistManagementApp
  *
- * UC3: Track Unique Bogie IDs using HashSet
+ * UC4: Maintain Ordered Bogie IDs using LinkedList
  *
- * Demonstrates uniqueness enforcement and automatic deduplication.
+ * Demonstrates ordered insertion, deletion, and middle insertion.
  *
  * @author Mahathi
  * @version 1.0
  */
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
 
 public class TrainConsistManagementApp {
 
@@ -18,17 +17,27 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create HashSet for unique bogie IDs
-        Set<String> bogieIds = new HashSet<>();
+        // Create LinkedList for ordered consist
+        LinkedList<String> train = new LinkedList<>();
 
-        // Add bogie IDs (including duplicates intentionally)
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101"); // duplicate
-        bogieIds.add("BG102"); // duplicate
+        // Add bogies (initial order)
+        train.add("Engine");
+        train.add("Sleeper");
+        train.add("AC");
+        train.add("Cargo");
+        train.add("Guard");
 
-        // Display unique bogie IDs
-        System.out.println("Unique Bogie IDs: " + bogieIds);
+        System.out.println("Initial Train: " + train);
+
+        // Insert Pantry Car at position 2 (index 2)
+        train.add(2, "Pantry Car");
+        System.out.println("After Adding Pantry Car: " + train);
+
+        // Remove first and last bogie
+        train.removeFirst();
+        train.removeLast();
+
+        // Final consist
+        System.out.println("Final Train Consist: " + train);
     }
 }
