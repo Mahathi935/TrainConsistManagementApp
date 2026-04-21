@@ -1,9 +1,9 @@
 /**
  * TrainConsistManagementApp
  *
- * UC1: Initialize Train and Display Consist Summary
+ * UC2: Add Passenger Bogies using ArrayList operations
  *
- * Demonstrates application startup and dynamic initialization using ArrayList.
+ * Demonstrates add, remove, contains, and order preservation.
  *
  * @author Mahathi
  * @version 1.0
@@ -16,15 +16,28 @@ public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        // Welcome message
         System.out.println("=== Train Consist Management App ===");
 
-        // Initialize empty consist (dynamic list)
-        List<String> trainConsist = new ArrayList<>();
+        // Create ArrayList
+        List<String> bogies = new ArrayList<>();
 
-        // Display initial bogie count
-        System.out.println("Initial Bogie Count: " + trainConsist.size());
+        // Add bogies
+        bogies.add("Sleeper");
+        bogies.add("AC Chair");
+        bogies.add("First Class");
 
-        System.out.println("Train initialized successfully.");
+        // Display after insertion
+        System.out.println("After Adding Bogies: " + bogies);
+
+        // Remove a bogie
+        bogies.remove("AC Chair");
+        System.out.println("After Removing AC Chair: " + bogies);
+
+        // Check existence
+        boolean exists = bogies.contains("Sleeper");
+        System.out.println("Is Sleeper Present? " + exists);
+
+        // Final state
+        System.out.println("Final Bogie List: " + bogies);
     }
 }
