@@ -1,15 +1,16 @@
 /**
  * TrainConsistManagementApp
  *
- * UC4: Maintain Ordered Bogie IDs using LinkedList
+ * UC5: Preserve Insertion Order using LinkedHashSet
  *
- * Demonstrates ordered insertion, deletion, and middle insertion.
+ * Demonstrates uniqueness + ordered storage of bogies.
  *
  * @author Mahathi
  * @version 1.0
  */
 
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class TrainConsistManagementApp {
 
@@ -17,27 +18,19 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create LinkedList for ordered consist
-        LinkedList<String> train = new LinkedList<>();
+        // Create LinkedHashSet (ordered + unique)
+        Set<String> train = new LinkedHashSet<>();
 
-        // Add bogies (initial order)
+        // Add bogies
         train.add("Engine");
         train.add("Sleeper");
-        train.add("AC");
         train.add("Cargo");
         train.add("Guard");
 
-        System.out.println("Initial Train: " + train);
+        // Add duplicate intentionally
+        train.add("Sleeper"); // will be ignored
 
-        // Insert Pantry Car at position 2 (index 2)
-        train.add(2, "Pantry Car");
-        System.out.println("After Adding Pantry Car: " + train);
-
-        // Remove first and last bogie
-        train.removeFirst();
-        train.removeLast();
-
-        // Final consist
-        System.out.println("Final Train Consist: " + train);
+        // Display formation
+        System.out.println("Train Formation (Ordered & Unique): " + train);
     }
 }
