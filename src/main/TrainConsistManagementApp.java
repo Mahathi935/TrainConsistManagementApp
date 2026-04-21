@@ -1,16 +1,16 @@
 /**
  * TrainConsistManagementApp
  *
- * UC2: Add Passenger Bogies using ArrayList operations
+ * UC3: Track Unique Bogie IDs using HashSet
  *
- * Demonstrates add, remove, contains, and order preservation.
+ * Demonstrates uniqueness enforcement and automatic deduplication.
  *
  * @author Mahathi
  * @version 1.0
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrainConsistManagementApp {
 
@@ -18,26 +18,17 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create ArrayList
-        List<String> bogies = new ArrayList<>();
+        // Create HashSet for unique bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        // Add bogies
-        bogies.add("Sleeper");
-        bogies.add("AC Chair");
-        bogies.add("First Class");
+        // Add bogie IDs (including duplicates intentionally)
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101"); // duplicate
+        bogieIds.add("BG102"); // duplicate
 
-        // Display after insertion
-        System.out.println("After Adding Bogies: " + bogies);
-
-        // Remove a bogie
-        bogies.remove("AC Chair");
-        System.out.println("After Removing AC Chair: " + bogies);
-
-        // Check existence
-        boolean exists = bogies.contains("Sleeper");
-        System.out.println("Is Sleeper Present? " + exists);
-
-        // Final state
-        System.out.println("Final Bogie List: " + bogies);
+        // Display unique bogie IDs
+        System.out.println("Unique Bogie IDs: " + bogieIds);
     }
 }
