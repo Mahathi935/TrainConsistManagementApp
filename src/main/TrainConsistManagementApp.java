@@ -1,15 +1,13 @@
 /**
  * TrainConsistManagementApp
  *
- * UC19: Binary Search for Bogie ID
+ * UC20: Prevent search on empty collection using IllegalStateException
  *
- * Demonstrates efficient searching on sorted data using divide-and-conquer.
+ * Demonstrates fail-fast validation before performing search.
  *
  * @author Mahathi
  * @version 1.0
  */
-
-import java.util.Arrays;
 
 public class TrainConsistManagementApp {
 
@@ -17,36 +15,26 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Sorted array of bogie IDs
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        // Empty bogie collection
+        String[] bogieIds = {};
 
-        // Ensure sorted (safety step)
-        Arrays.sort(bogieIds);
+        String searchId = "BG101";
 
-        String searchId = "BG309";
+        // Defensive check (fail-fast)
+        if (bogieIds.length == 0) {
+            throw new IllegalStateException("Cannot perform search: No bogies available in train.");
+        }
 
-        int low = 0;
-        int high = bogieIds.length - 1;
+        // (Search logic will not run if empty)
         boolean found = false;
 
-        // Binary Search
-        while (low <= high) {
-
-            int mid = (low + high) / 2;
-
-            int comparison = searchId.compareTo(bogieIds[mid]);
-
-            if (comparison == 0) {
+        for (String id : bogieIds) {
+            if (id.equals(searchId)) {
                 found = true;
                 break;
-            } else if (comparison > 0) {
-                low = mid + 1; // search right half
-            } else {
-                high = mid - 1; // search left half
             }
         }
 
-        // Result
         if (found) {
             System.out.println("Bogie Found: " + searchId);
         } else {
