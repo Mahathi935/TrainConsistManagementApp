@@ -1,13 +1,15 @@
 /**
  * TrainConsistManagementApp
  *
- * UC16: Bubble Sort (Manual Sorting)
+ * UC17: Sort Bogie Names using Arrays.sort()
  *
- * Sorts passenger bogie capacities without using built-in methods.
+ * Demonstrates built-in optimized sorting (alphabetical).
  *
  * @author Mahathi
  * @version 1.0
  */
+
+import java.util.Arrays;
 
 public class TrainConsistManagementApp {
 
@@ -15,39 +17,22 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Array of bogie capacities
-        int[] capacities = {72, 56, 24, 70, 60};
+        // Array of bogie names
+        String[] bogies = {
+                "Sleeper",
+                "AC Chair",
+                "First Class",
+                "General",
+                "Luxury"
+        };
 
-        System.out.print("Original Capacities: ");
-        printArray(capacities);
+        // Display original array
+        System.out.println("Original Bogies: " + Arrays.toString(bogies));
 
-        // Bubble Sort
-        int n = capacities.length;
+        // Sort using built-in method
+        Arrays.sort(bogies);
 
-        for (int i = 0; i < n - 1; i++) {
-
-            for (int j = 0; j < n - i - 1; j++) {
-
-                // Compare adjacent elements
-                if (capacities[j] > capacities[j + 1]) {
-
-                    // Swap
-                    int temp = capacities[j];
-                    capacities[j] = capacities[j + 1];
-                    capacities[j + 1] = temp;
-                }
-            }
-        }
-
-        System.out.print("Sorted Capacities: ");
-        printArray(capacities);
-    }
-
-    // Helper method to print array
-    public static void printArray(int[] arr) {
-        for (int val : arr) {
-            System.out.print(val + " ");
-        }
-        System.out.println();
+        // Display sorted array
+        System.out.println("Sorted Bogies: " + Arrays.toString(bogies));
     }
 }
