@@ -1,19 +1,19 @@
 /**
  * TrainConsistManagementApp
  *
- * UC7: Sort Bogies by Capacity using Comparator
+ * UC8: Filter Bogies using Stream API
  *
- * Demonstrates object-based collections and custom sorting logic.
+ * Demonstrates filtering using streams and lambda expressions.
  *
  * @author Mahathi
  * @version 1.0
  */
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-// Bogie class (custom object)
+// Bogie class (same as UC7)
 class Bogie {
     String name;
     int capacity;
@@ -30,22 +30,27 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create list of bogies
+        // Create bogie list
         List<Bogie> bogies = new ArrayList<>();
 
-        // Add bogies
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 40));
+        bogies.add(new Bogie("General", 80));
 
-        // Sort by capacity (ascending)
-        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+        // Apply stream filter (capacity > 60)
+        List<Bogie> filtered = bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
 
-        // Display sorted bogies
-        System.out.println("Bogies Sorted by Capacity:");
+        // Display filtered bogies
+        System.out.println("Filtered Bogies (Capacity > 60):");
 
-        for (Bogie b : bogies) {
+        for (Bogie b : filtered) {
             System.out.println(b.name + " → " + b.capacity);
         }
+
+        // Show original list unchanged
+        System.out.println("\nOriginal List Size: " + bogies.size());
     }
 }
