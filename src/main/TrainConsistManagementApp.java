@@ -1,52 +1,13 @@
 /**
  * TrainConsistManagementApp
  *
- * UC15: Safe Cargo Assignment using try-catch-finally
+ * UC16: Bubble Sort (Manual Sorting)
  *
- * Demonstrates runtime exception handling and safe execution flow.
+ * Sorts passenger bogie capacities without using built-in methods.
  *
  * @author Mahathi
  * @version 1.0
  */
-
-// Custom Runtime Exception
-class CargoSafetyException extends RuntimeException {
-    public CargoSafetyException(String message) {
-        super(message);
-    }
-}
-
-// Goods Bogie class
-class GoodsBogie {
-    String shape;
-    String cargo;
-
-    public GoodsBogie(String shape) {
-        this.shape = shape;
-    }
-
-    public void assignCargo(String cargo) {
-
-        try {
-            // Rule: Rectangular cannot carry Petroleum
-            if (shape.equals("Rectangular") && cargo.equals("Petroleum")) {
-                throw new CargoSafetyException("Unsafe: Rectangular bogie cannot carry Petroleum");
-            }
-
-            // Safe assignment
-            this.cargo = cargo;
-            System.out.println("Cargo assigned successfully: " + cargo + " → " + shape);
-
-        } catch (CargoSafetyException e) {
-            // Handle exception
-            System.out.println("Error: " + e.getMessage());
-
-        } finally {
-            // Always executes
-            System.out.println("Cargo assignment process completed.\n");
-        }
-    }
-}
 
 public class TrainConsistManagementApp {
 
@@ -54,18 +15,39 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Safe case
-        GoodsBogie b1 = new GoodsBogie("Cylindrical");
-        b1.assignCargo("Petroleum");
+        // Array of bogie capacities
+        int[] capacities = {72, 56, 24, 70, 60};
 
-        // Unsafe case
-        GoodsBogie b2 = new GoodsBogie("Rectangular");
-        b2.assignCargo("Petroleum");
+        System.out.print("Original Capacities: ");
+        printArray(capacities);
 
-        // Program continues
-        GoodsBogie b3 = new GoodsBogie("Open");
-        b3.assignCargo("Coal");
+        // Bubble Sort
+        int n = capacities.length;
 
-        System.out.println("Program continues safely...");
+        for (int i = 0; i < n - 1; i++) {
+
+            for (int j = 0; j < n - i - 1; j++) {
+
+                // Compare adjacent elements
+                if (capacities[j] > capacities[j + 1]) {
+
+                    // Swap
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.print("Sorted Capacities: ");
+        printArray(capacities);
+    }
+
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int val : arr) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
     }
 }
