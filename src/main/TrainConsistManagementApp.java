@@ -1,16 +1,16 @@
 /**
  * TrainConsistManagementApp
  *
- * UC9: Group Bogies using Collectors.groupingBy()
+ * UC10: Count Total Seats using Stream reduce()
  *
- * Demonstrates grouping of bogies into categories.
+ * Demonstrates aggregation of capacities into a single value.
  *
  * @author Mahathi
  * @version 1.0
  */
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 // Bogie class
 class Bogie {
@@ -34,26 +34,18 @@ public class TrainConsistManagementApp {
 
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("Sleeper", 70));
         bogies.add(new Bogie("First Class", 40));
-        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("General", 80));
 
-        // Group bogies by type (name)
-        Map<String, List<Bogie>> grouped = bogies.stream()
-                .collect(Collectors.groupingBy(b -> b.name));
+        // Stream aggregation (total capacity)
+        int totalSeats = bogies.stream()
+                .map(b -> b.capacity)          // extract capacity
+                .reduce(0, Integer::sum);      // sum all values
 
-        // Display grouped result
-        System.out.println("Grouped Bogies:");
+        // Display result
+        System.out.println("Total Seating Capacity: " + totalSeats);
 
-        for (Map.Entry<String, List<Bogie>> entry : grouped.entrySet()) {
-            System.out.println("\nType: " + entry.getKey());
-
-            for (Bogie b : entry.getValue()) {
-                System.out.println("  Capacity: " + b.capacity);
-            }
-        }
-
-        // Show original list unchanged
-        System.out.println("\nOriginal List Size: " + bogies.size());
+        // Verify original list unchanged
+        System.out.println("Total Bogies: " + bogies.size());
     }
 }
