@@ -1,27 +1,16 @@
 /**
  * TrainConsistManagementApp
  *
- * UC10: Count Total Seats using Stream reduce()
+ * UC11: Validate Train ID & Cargo Code using Regex
  *
- * Demonstrates aggregation of capacities into a single value.
+ * Demonstrates input validation using Pattern and Matcher.
  *
  * @author Mahathi
  * @version 1.0
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
-// Bogie class
-class Bogie {
-    String name;
-    int capacity;
-
-    public Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-    }
-}
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class TrainConsistManagementApp {
 
@@ -29,23 +18,34 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create bogie list
-        List<Bogie> bogies = new ArrayList<>();
+        // Sample inputs
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
 
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("First Class", 40));
-        bogies.add(new Bogie("General", 80));
+        // Regex patterns
+        String trainPattern = "TRN-\\d{4}";
+        String cargoPattern = "PET-[A-Z]{2}";
 
-        // Stream aggregation (total capacity)
-        int totalSeats = bogies.stream()
-                .map(b -> b.capacity)          // extract capacity
-                .reduce(0, Integer::sum);      // sum all values
+        // Compile patterns
+        Pattern p1 = Pattern.compile(trainPattern);
+        Pattern p2 = Pattern.compile(cargoPattern);
 
-        // Display result
-        System.out.println("Total Seating Capacity: " + totalSeats);
+        // Match inputs
+        Matcher m1 = p1.matcher(trainId);
+        Matcher m2 = p2.matcher(cargoCode);
 
-        // Verify original list unchanged
-        System.out.println("Total Bogies: " + bogies.size());
+        // Validate Train ID
+        if (m1.matches()) {
+            System.out.println("Valid Train ID: " + trainId);
+        } else {
+            System.out.println("Invalid Train ID: " + trainId);
+        }
+
+        // Validate Cargo Code
+        if (m2.matches()) {
+            System.out.println("Valid Cargo Code: " + cargoCode);
+        } else {
+            System.out.println("Invalid Cargo Code: " + cargoCode);
+        }
     }
 }
