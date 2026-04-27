@@ -1,19 +1,18 @@
 /**
  * TrainConsistManagementApp
  *
- * UC8: Filter Bogies using Stream API
+ * UC9: Group Bogies using Collectors.groupingBy()
  *
- * Demonstrates filtering using streams and lambda expressions.
+ * Demonstrates grouping of bogies into categories.
  *
  * @author Mahathi
  * @version 1.0
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-// Bogie class (same as UC7)
+// Bogie class
 class Bogie {
     String name;
     int capacity;
@@ -35,19 +34,23 @@ public class TrainConsistManagementApp {
 
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("Sleeper", 70));
         bogies.add(new Bogie("First Class", 40));
-        bogies.add(new Bogie("General", 80));
+        bogies.add(new Bogie("AC Chair", 60));
 
-        // Apply stream filter (capacity > 60)
-        List<Bogie> filtered = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+        // Group bogies by type (name)
+        Map<String, List<Bogie>> grouped = bogies.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
 
-        // Display filtered bogies
-        System.out.println("Filtered Bogies (Capacity > 60):");
+        // Display grouped result
+        System.out.println("Grouped Bogies:");
 
-        for (Bogie b : filtered) {
-            System.out.println(b.name + " → " + b.capacity);
+        for (Map.Entry<String, List<Bogie>> entry : grouped.entrySet()) {
+            System.out.println("\nType: " + entry.getKey());
+
+            for (Bogie b : entry.getValue()) {
+                System.out.println("  Capacity: " + b.capacity);
+            }
         }
 
         // Show original list unchanged
